@@ -1,0 +1,163 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} 
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} 
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{framed}
+\usepackage{amssymb}
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim}
+\usepackage{subfig} 
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{Dublin \texttt{R}}\chead{Cluster Analysis with \texttt{R}}\rhead{June 2014}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Brief Article}
+\author{The Author}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\tableofcontents
+\newpage
+\section{$k-$Means Clustering}
+K-means clustering is the most popular partitioning method. It requires the analyst to specify the number of clusters to extract. A plot of the within groups sum of squares by number of clusters extracted can help determine the appropriate number of clusters. The analyst looks for a bend in the plot similar to a scree test in factor analysis. See Everitt & Hothorn (pg. 251).
+\subsection{\texttt{kmeans}}
+The data given by $x$ is clustered by the k-means method, which aims to partition the points into k groups such that the sum of squares from points to the assigned cluster centres is minimized. At the minimum, all cluster centres are at the mean of their Voronoi sets (the set of data points which are nearest to the cluster centre).
+
+\subsection{Clustering Algorithm}
+
+The algorithm of Hartigan and Wong (1979) is used by default. Note that some authors use k-means to refer to a specific algorithm rather than the general method: most commonly the algorithm given by MacQueen (1967) but sometimes that given by Lloyd (1957) and Forgy (1965). 
+
+\subsection{Number of Random Starts}
+The \textit{Hartigan–Wong} algorithm generally does a better job than either of those, but trying several random starts (nstart  > 1) is often recommended.
+
+\subsection{Single Cluster Solution}For ease of programmatic exploration, $k=1$ is allowed, notably returning the \texttt{center} and \texttt{withinss}.
+
+\subsection{The Iris Data Set}
+\begin{verbatim}
+> kmeans(iris[,1:4],3)[1]
+$cluster
+  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+ [38] 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+ [75] 2 2 2 3 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 2 3 3 3 3 2 3 3 3 3
+[112] 3 3 2 2 3 3 3 3 2 3 2 3 2 3 3 2 2 3 3 3 3 3 2 3 3 3 3 2 3 3 3 2 3 3 3 2 3
+[149] 3 2
+\end{verbatim}
+
+\begin{verbatim}
+table(iris4Var$cluster,iris2Var$cluster)
+   
+     1  2  3
+  1 52 10  0
+  2  0  0 50
+  3  1 37  0
+\end{verbatim}
+
+
+\section{Hierarchical Clustering}
+% http://127.0.0.1:14607/library/stats/html/hclust.html
+The \texttt{hclust} function performs a hierarchical cluster analysis using a set of dissimilarities for the $n$ objects being clustered.
+
+\begin{itemize} 
+\item Initially, each object is assigned to its own cluster.
+\item Then the algorithm proceeds iteratively, at each stage joining the two most similar clusters. \item This process continues until there is just a single cluster, containing all objects. 
+\item At each stage distances between clusters are recomputed by the \textbf{Lance–Williams} dissimilarity update formula according to the particular clustering method being used.
+\end{itemize}
+
+A number of different clustering methods are provided. 
+
+\begin{itemize}
+\item Ward's minimum variance method aims at finding compact, spherical clusters. 
+\item The complete linkage method finds similar clusters. 
+\item The single linkage method (which is closely related to the minimal spanning tree) adopts a ‘friends of friends’ clustering strategy. 
+\item The other methods can be regarded as aiming for clusters with characteristics somewhere between the single and complete link methods. 
+\end{itemize}
+Note however, that methods "median" and "centroid" are not leading to a monotone distance measure, or equivalently the resulting dendrograms can have so called inversions (which are hard to interpret).
+
+\subsection{USA Arrests Example}
+\begin{verbatim}
+> class(hc1)
+[1] "hclust"
+> mode(hc1)
+[1] "list"
+> 
+\end{verbatim}
+
+%---------------------------------------------------------------------------------------%
+\newpage
+\subsection{Drawing a Dendrogram}
+
+
+What is a dendrogram?
+
+
+
+To draw a dendrogram, simply use the \texttt{plot} command, specifying a \texttt{hclust} object as an input.
+\begin{framed}
+\begin{verbatim}
+
+
+hc <- hclust(dist(USArrests), "ave")
+plot(hc)
+plot(hc, hang = -1)
+
+\end{verbatim}
+\end{framed}
+
+%---------------------------------------------------------------------------------------%
+
+
+Do the same with centroid clustering and squared Euclidean distance, cut the tree into ten clusters and reconstruct the upper part of the tree from the cluster centers.
+\begin{framed}
+\begin{verbatim}
+hc <- hclust(dist(USArrests)^2, "cen")
+memb <- cutree(hc, k = 10)
+cent <- NULL
+for(k in 1:10){
+  cent <- rbind(cent, colMeans(USArrests[memb == k, , drop = FALSE]))
+}
+\end{verbatim}
+\end{framed}
+
+%---------------------------------------------------------------------------------------%
+\begin{framed}
+\begin{verbatim}
+hc1 <- hclust(dist(cent)^2, method = "cen", members = table(memb))
+opar <- par(mfrow = c(1, 2))
+plot(hc,  labels = FALSE, hang = -1, main = "Original Tree")
+plot(hc1, labels = FALSE, hang = -1, main = "Re-start from 10 clusters")
+par(opar)
+
+
+\end{verbatim}
+\end{framed}
+
+\end{document}

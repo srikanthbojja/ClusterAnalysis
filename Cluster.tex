@@ -1,0 +1,122 @@
+\documentclass[]{article}
+
+%opening
+\title{}
+\author{}
+
+\usepackage{framed}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+%----------------------------------------%
+
+\subsection{Clustering Analysis with \texttt{R}}
+\Large
+Data set for this example
+\begin{framed}
+\begin{verbatim}
+X <-iris[ , 1:4 ]
+
+\end{verbatim}
+\end{framed}
+
+
+
+
+\Large
+\begin{itemize}
+\item \texttt{dist()} - computes the \textit{\textbf{distance matrix}} i.e. a matrix of similarity measures for each pair of cases in the data set.
+\vspace{0.3cm}
+\item \texttt{hclust()} - constructs a hierarchical clustering procedure, based on one of the linkage procedures.
+\vspace{0.3cm}
+\end{itemize}
+
+
+\begin{itemize}
+
+\item \texttt{rect.hclust()}: This command draws rectangles around the branches of a dendrogram highlighting the corresponding clusters. \item First the dendrogram is cut at a certain height (\texttt{h}) level, then a rectangle is drawn around selected branches.
+\end{itemize}
+
+
+\begin{framed}
+\begin{verbatim}
+plot(hclust(DistMat,method="ward"))
+rect.hclust(hclust(DistMat,method="ward"),h=10)
+
+plot(hclust(DistMat,method="centroid"))
+rect.hclust(hclust(DistMat,method="centroid"),h=1.2)
+
+plot(hclust(DistMat,method="average"))
+rect.hclust(hclust(DistMat,method="average"),h=1.2)
+\end{verbatim}
+\end{framed}
+
+
+
+%---------------------------------------------------------- %
+
+
+\subsection{k-means clustering with \texttt{R}}
+
+For this example, we will use the four numeric columns from the iris data set, i.e. columns 1 to 4.
+\begin{framed}
+\begin{verbatim}
+X <- iris[,1:4]
+\end{verbatim}
+\end{framed}
+
+
+%---------------------------------------------------------- %
+
+
+\subsection{k-means clustering with \texttt{R}}
+
+\begin{framed}
+\begin{verbatim}
+kmeans(X,centers=3)
+\end{verbatim}
+\end{framed}
+
+
+%---------------------------------------------------------- %
+%---------------------------------------------------------- %
+
+
+\subsection{k-means clustering with \texttt{R}}
+
+\begin{framed}
+\begin{verbatim}
+kmeans(X,centers=3)
+\end{verbatim}
+\end{framed}
+\begin{verbatim}
+Within cluster sum of squares by cluster:
+[1] 15.15100 39.82097 23.87947
+ (between_SS / total_SS =  88.4 %)
+\end{verbatim}
+
+%---------------------------------------------------------- %
+
+\Large
+\begin{framed}
+\begin{verbatim}
+PredClass <- kmeans(X,centers=3)$cluster
+table(PredClass,iris$Species)
+\end{verbatim}
+\end{framed}
+\begin{verbatim}
+        
+PredClass setosa versicolor virginica
+        1     50          0         0
+        2      0          2        36
+        3      0         48        14
+
+\end{verbatim}
+\end{document}
