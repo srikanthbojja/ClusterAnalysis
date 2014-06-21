@@ -22,5 +22,7 @@ The function returns an object with the following items:
 <pre><code>
 R> names(cfuz)
 </code></pre>
+Here membership is the probability proﬁle of belonging to a certain class, and
+clustering is the most likely crisp classiﬁcation.
 
 - http://cc.oulu.fi/~jarioksa/opetus/metodi/sessio3.pdf
