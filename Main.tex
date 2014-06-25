@@ -14,6 +14,54 @@ One of the oldest methods of cluster analysis is known as k-means cluster analys
 Looking on the good side, the k-means technique is fast, and doesn't require calculating all of the distances between each observation and every other observation. It can be written to efficiently deal with very large data sets, so it may be useful in cases where other methods fail. On the down side, if you rearrange your data, it's very possible that you'll get a different solution every time you change the ordering of your data. Another criticism of this technique is that you may try, for example, a 3 cluster solution that seems to work pretty well, but when you look for the 4 cluster solution, all of the structure that the 3 cluster solution revealed is gone. This makes the procedure somewhat unattractive if you don't know exactly how many clusters you should have in the first place.
 
 
+\begin{itemize}
+\item Cluster analysis is a convenient method for identifying homogenous groups of
+objects called clusters. Objects (or cases, observations) in a specific cluster share
+many characteristics, but are very dissimilar to objects not belonging to that cluster.
+\item  There are three cluster analysis approaches: hierarchical methods,
+partitioning methods (more precisely, k-means), and two-step clustering,
+which is largely a combination of the first two methods. In the last class we looked as hierarchical clustering analysis.
+\item Each of these procedures
+follows a different approach to grouping the most similar objects into a cluster and
+to determining each object’s cluster membership.
+\item Some approaches – most notably hierarchical methods – require us to specify how similar or different objects
+    are in order to identify different clusters. Most software packages, such as SPSS, calculate a measure
+of (dis)similarity by estimating the distance between pairs of objects. Objects with
+smaller distances between one another are more similar, whereas objects with larger
+distances are more dissimilar.
+\item An important problem in the application of cluster analysis is the decision
+regarding how many clusters should be derived from the data. This question is
+explored in the next step of the analysis. Sometimes, however,
+number of segments that have to be derived from the data will be known in advance.
+\item
+By choosing a specific clustering procedure, we determine how clusters are to be
+formed. (This always involves optimizing some kind of criterion, such as minimizing
+the within-cluster variance (i.e., the clustering variables’ overall variance of
+objects in a specific cluster), or maximizing the distance between the objects or
+clusters). The procedure could also address the question of how to determine the
+(dis)similarity between objects in a newly formed cluster and the remaining objects
+in the dataset.
+\item
+Hierarchical clustering procedures are characterized by the tree-like structure
+established in the course of the analysis. Most hierarchical techniques fall into a
+category called agglomerative clustering. In this category, clusters are consecutively
+formed from objects. Initially, this type of procedure starts with each object
+representing an individual cluster. These clusters are then sequentially merged
+according to their similarity. First, the two most similar clusters (i.e., those with
+the smallest distance between them) are merged to form a new cluster at the bottom
+of the hierarchy. In the next step, another pair of clusters is merged and linked to a
+higher level of the hierarchy, and so on. This allows a hierarchy of clusters to be
+established from the bottom up.
+\item A cluster hierarchy can also be generated top-down. In this divisive clustering,
+all objects are initially merged into a single cluster, which is then gradually split up. Divisive procedures are quite rarely used in practice. We therefore
+concentrate on the agglomerative clustering procedures.
+\item This means that if an object is assigned
+to a certain cluster, there is no possibility of reassigning this object to another
+cluster. This is an important distinction between these types of clustering and
+partitioning methods such as \textbf{\textit{k-means}}.
+\end{itemize}
+%--------------------------------------------------------------------%
+\subsection{Implementation with \texttt{R}}
 The R cluster library provides a modern alternative to k-means clustering, known as pam, which is an acronym for "Partitioning around Medoids". The term medoid refers to an observation within a cluster for which the sum of the distances between it and all the other members of the cluster is a minimum. pam requires that you know the number of clusters that you want (like k-means clustering), but it does more computation than k-means in order to insure that the medoids it finds are truly representative of the observations within a given cluster. Recall that in the k-means method the centers of the clusters (which might or might not actually correspond to a particular observation) are only recaculated after all of the observations have had a chance to move from one cluster to another. With pam, the sums of the distances between objects within a cluster are constantly recalculated as observations move around, which will hopefully provide a more reliable solution. Furthermore, as a by-product of the clustering operation it identifies the observations that represent the medoids, and these observations (one per cluster) can be considered a representative example of the members of that cluster which may be useful in some situations. pam does require that the entire distance matrix is calculated to facilitate the recalculation of the medoids, and it does involve considerably more computation than k-means, but with modern computers this may not be a important consideration. As with k-means, there's no guarantee that the structure that's revealed with a small number of clusters will be retained when you increase the number of clusters.
 Another class of clustering methods, known as hierarchical agglomerative clustering methods, starts out by putting each observation into its own separate cluster. It then examines all the distances between all the observations and pairs together the two closest ones to form a new cluster. This is a simple operation, since hierarchical methods require a distance matrix, and it represents exactly what we want - the distances between individual observations. So finding the first cluster to form simply means looking for the smallest number in the distance matrix and joining the two observations that the distance correspnds to into a new cluster. Now there is one less cluster than there are observations. To determine which observations will form the next cluster, we need to come up with a method for finding the distance between an existing cluster and individual observations, since once a cluster has been formed, we'll determine which observation will join it based on the distance between the cluster and the observation. Some of the methods that have been proposed to do this are to take the minimum distance between an observation and any member of the cluster, to take the maximum distance, to take the average distance, or to use some kind of measure that minimizes the distances between observations within the cluster. Each of these methods will reveal certain types of structure within the data. Using the minimum tends to find clusters that are drawn out and "snake"-like, while using the maximum tends to find compact clusters. Using the mean is a compromise between those methods. One method that tends to produce clusters of more equal size is known as Ward's method. It attempts to form clusters keeping the distances within the clusters as small as possible, and is often useful when the other methods find clusters with only a few observations. Agglomerative Hierarchical cluster analysis is provided in R through the hclust function.
 Notice that, by its very nature, solutions with many clusters are nested within the solutions that have fewer clusters, so observations don't "jump ship" as they do in k-means or the pam methods. Furthermore, we don't need to tell these procedures how many clusters we want - we get a complete set of solutions starting from the trivial case of each observation in a separate cluster all the way to the other trivial case where we say all the observations are in a single cluster.
