@@ -1,23 +1,53 @@
-Cluster Analysis
+\tableofcontents
 
-1  Clustering Techniques
+\section{Cluster Analysis}
+
+\subsection{Introduction to Cluster Analysis (optional)}
+
+
+%----------------------------------------------%
+% 1  Clustering Techniques
 
 Much of the history of cluster analysis is concerned with developing algorithms that were not too computer intensive, since early computers were not nearly as powerful as they are today. Accordingly, computational shortcuts have traditionally been used in many cluster analysis algorithms. These algorithms have proven to be very useful, and can be found in most computer software.
 More recently, many of these older methods have been revisited and updated to reflect the fact that certain computations that once would have overwhelmed the available computers can now be performed routinely. In R, a number of these updated versions of cluster analysis algorithms are available through the cluster library, providing us with a large selection of methods to perform cluster analysis, and the possibility of comparing the old methods with the new to see if they really provide an advantage.
 One of the oldest methods of cluster analysis is known as k-means cluster analysis, and is available in R through the kmeans function. The first step (and certainly not a trivial one) when using k-means cluster analysis is to specify the number of clusters (k) that will be formed in the final solution. The process begins by choosing k observations to serve as centers for the clusters. Then, the distance from each of the other observations is calculated for each of the k clusters, and observations are put in the cluster to which they are the closest. After each observation has been put in a cluster, the center of the clusters is recalculated, and every observation is checked to see if it might be closer to a different cluster, now that the centers have been recalculated. The process continues until no observations switch clusters.
 Looking on the good side, the k-means technique is fast, and doesn't require calculating all of the distances between each observation and every other observation. It can be written to efficiently deal with very large data sets, so it may be useful in cases where other methods fail. On the down side, if you rearrange your data, it's very possible that you'll get a different solution every time you change the ordering of your data. Another criticism of this technique is that you may try, for example, a 3 cluster solution that seems to work pretty well, but when you look for the 4 cluster solution, all of the structure that the 3 cluster solution revealed is gone. This makes the procedure somewhat unattractive if you don't know exactly how many clusters you should have in the first place.
+
+
 The R cluster library provides a modern alternative to k-means clustering, known as pam, which is an acronym for "Partitioning around Medoids". The term medoid refers to an observation within a cluster for which the sum of the distances between it and all the other members of the cluster is a minimum. pam requires that you know the number of clusters that you want (like k-means clustering), but it does more computation than k-means in order to insure that the medoids it finds are truly representative of the observations within a given cluster. Recall that in the k-means method the centers of the clusters (which might or might not actually correspond to a particular observation) are only recaculated after all of the observations have had a chance to move from one cluster to another. With pam, the sums of the distances between objects within a cluster are constantly recalculated as observations move around, which will hopefully provide a more reliable solution. Furthermore, as a by-product of the clustering operation it identifies the observations that represent the medoids, and these observations (one per cluster) can be considered a representative example of the members of that cluster which may be useful in some situations. pam does require that the entire distance matrix is calculated to facilitate the recalculation of the medoids, and it does involve considerably more computation than k-means, but with modern computers this may not be a important consideration. As with k-means, there's no guarantee that the structure that's revealed with a small number of clusters will be retained when you increase the number of clusters.
 Another class of clustering methods, known as hierarchical agglomerative clustering methods, starts out by putting each observation into its own separate cluster. It then examines all the distances between all the observations and pairs together the two closest ones to form a new cluster. This is a simple operation, since hierarchical methods require a distance matrix, and it represents exactly what we want - the distances between individual observations. So finding the first cluster to form simply means looking for the smallest number in the distance matrix and joining the two observations that the distance correspnds to into a new cluster. Now there is one less cluster than there are observations. To determine which observations will form the next cluster, we need to come up with a method for finding the distance between an existing cluster and individual observations, since once a cluster has been formed, we'll determine which observation will join it based on the distance between the cluster and the observation. Some of the methods that have been proposed to do this are to take the minimum distance between an observation and any member of the cluster, to take the maximum distance, to take the average distance, or to use some kind of measure that minimizes the distances between observations within the cluster. Each of these methods will reveal certain types of structure within the data. Using the minimum tends to find clusters that are drawn out and "snake"-like, while using the maximum tends to find compact clusters. Using the mean is a compromise between those methods. One method that tends to produce clusters of more equal size is known as Ward's method. It attempts to form clusters keeping the distances within the clusters as small as possible, and is often useful when the other methods find clusters with only a few observations. Agglomerative Hierarchical cluster analysis is provided in R through the hclust function.
 Notice that, by its very nature, solutions with many clusters are nested within the solutions that have fewer clusters, so observations don't "jump ship" as they do in k-means or the pam methods. Furthermore, we don't need to tell these procedures how many clusters we want - we get a complete set of solutions starting from the trivial case of each observation in a separate cluster all the way to the other trivial case where we say all the observations are in a single cluster.
 Traditionally, hierarchical cluster analysis has taken computational shortcuts when updating the distance matrix to reflect new clusters. In particular, when a new cluster is formed and the distance matrix is updated, all the information about the individual members of the cluster is discarded in order to make the computations faster. The cluster library provides the agnes function which uses essentially the same technique as hclust, but which uses fewer shortcuts when updating the distance matrix. For example, when the mean method of calculating the distance between observations and clusters is used, hclust only uses the two observations and/or clusters which were recently merged when updating the distance matrix, while agnes calculates those distances as the average of all the distances between all the observations in the two clusters. While the two techniques will usually agree quite closely when minimum or maximum updating methods are used, there may be noticeable differences when updating using the average distance or Ward's method.
-2  Hierarchial Clustering
+%----------------------------------------------%
+
+\subsubsection{Application Areas}
+
+\newpage
+\subsection{Key Concepts}
+
+
+\subsubsection{Supervised Learning v Unsupervised Learning}
+
+\subsubsection{Agglomerative vs Divisive Clustering}
+\subsubsection{Distance Matrix}
+
+%----------------------------------------------%
+\newpage
+\subsection{Hierarchial Clustering
+
 
 For the hierarchial clustering methods, the dendogram is the main graphical tool for getting insight into a cluster solution. When you use hclust or agnes to perform a cluster analysis, you can see the dendogram by passing the result of the clustering to the plot function.
 To illustrate interpretation of the dendogram, we'll look at a cluster analysis performed on a set of cars from 1978-1979; the data can be found at http://www.stat.berkeley.edu/classes/s133/data/cars.tab. Since the data is a tab-delimited file, we use read.delim:
+
+\begin{framed}
+\begin{verbatim}
 > cars = read.delim('cars.tab',stringsAsFactors=FALSE)
 
+\end{verbatim}
+\end{framed}
 To get an idea of what information we have, let's look at the first few records;
- 
+\begin{framed}
+\begin{verbatim} 
 > head(cars) 
   Country                       Car  MPG Weight Drive_Ratio Horsepower
 1    U.S.        Buick Estate Wagon 16.9  4.360        2.73        155
@@ -33,21 +63,31 @@ To get an idea of what information we have, let's look at the first few records;
 4          360         8
 5           98         4
 6          134         4
-
+\end{verbatim}
+\end{framed}
 It looks like the variables are measured on different scales, so we will likely want to standardize the data before proceeding. The daisy function in the cluster library will automatically perform standardization, but it doesn't give you complete control. If you have a particular method of standardization in mind, you can use the scale function. You pass scale a matrix or data frame to be standardized, and two optional vectors. The first, called center, is a vector of values, one for each column of the matrix or data frame to be standardized, which will be subtracted from every entry in that column. The second, called scale, is similar to center, but is used to divide the values in each column. Thus, to get z-scores, you could pass scale a vector of means for center, and a vector of standard deviations for scale. These vectors can be created with the apply function, that performs the same operation on each row or column of a matrix. Suppose we want to standardize by subtracting the median and dividing by the mean average deviation:
+\begin{framed}
+\begin{verbatim}
 > cars.use = cars[,-c(1,2)]
 > medians = apply(cars.use,2,median)
 > mads = apply(cars.use,2,mad)
 > cars.use = scale(cars.use,center=medians,scale=mads)
-
+\end{verbatim}
+\end{framed}
 (The 2 used as the second argument to apply means to apply the function to the columns of the matrix or data frame; a value of 1 means to use the rows.) The country of origin and name of the car will not be useful in the cluster analysis, so they have been removed. Notice that the scale function doesn't change the order of the rows of the data frame, so it will be easy to identify observations using the omitted columns from the original data.
 First, we'll take a look at a hierarchical method, since it will provide information about solutions with different numbers of clusters. The first step is calculating a distance matrix. For a data set with n observations, the distance matrix will have n rows and n columns; the (i,j)th element of the distance matrix will be the difference between observation i and observation j. There are two functions that can be used to calculate distance matrices in R; the dist function, which is included in every version of R, and the daisy function, which is part of the cluster library. We'll use the dist function in this example, but you should familiarize yourself with the daisy function (by reading its help page), since it offers some capabilities that dist does not. Each function provides a choice of distance metrics; in this example, we'll use the default of Euclidean distance, but you may find that using other metrics will give different insights into the structure of your data.
+\begin{framed}
+\begin{verbatim}
 cars.dist = dist(cars.use)
-
+\end{verbatim}
+\end{framed}
 If you display the distance matrix in R (for example, by typing its name), you'll notice that only the lower triangle of the matrix is displayed. This is to remind us that the distance matrix is symmetric, since it doesn't matter which observation we consider first when we calculate a distance. R takes advantage of this fact by only storing the lower triangle of the distance matrix. All of the clustering functions will recognize this and have no problems, but if you try to access the distance matrix in the usual way (for example, with subscripting), you'll see an error message. Thus, if you need to use the distance matrix with anything other than the clustering functions, you'll need to use as.matrix to convert it to a regular matrix.
 To get started, we'll use the hclust method; the cluster library provides a similar function, called agnes to perform hierarchical cluster analysis.
+\begin{framed}
+\begin{verbatim}
 > cars.hclust = hclust(cars.dist)
-
+\end{verbatim}
+\end{framed}
 Once again, we're using the default method of hclust, which is to update the distance matrix using what R calls "complete" linkage. Using this method, when a cluster is formed, its distance to other objects is computed as the maximum distance between any object in the cluster and the other object. Other linkage methods will provide different solutions, and should not be ignored. For example, using method=ward tends to produce clusters of fairly equal size, and can be useful when other methods find clusters that contain just a few observations.
 Now that we've got a cluster solution (actually a collection of cluster solutions), how can we examine the results? The main graphical tool for looking at a hierarchical cluster solution is known as a dendogram. This is a tree-like display that lists the objects which are clustered along the x-axis, and the distance at which the cluster was formed along the y-axis. (Distances along the x-axis are meaningless in a dendogram; the observations are equally spaced to make the dendogram easier to read.) To create a dendogram from a cluster solution, simply pass it to the plot function. The result is displayed below.
 plot(cars.hclust,labels=cars$Car,main='Default from hclust')
