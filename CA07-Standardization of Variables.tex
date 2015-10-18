@@ -1,0 +1,51 @@
+
+\documentclass[a4paper,12pt]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{eurosym}
+\usepackage{vmargin}
+\usepackage{amsmath}
+\usepackage{graphics}
+\usepackage{epsfig}
+\usepackage{subfigure}
+\usepackage{fancyhdr}
+%\usepackage{listings}
+\usepackage{framed}
+\usepackage{graphicx}
+
+\setcounter{MaxMatrixCols}{10}
+%TCIDATA{OutputFilter=LATEX.DLL}
+%TCIDATA{Version=5.00.0.2570}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{LastRevised=Wednesday, February 23, 2011 13:24:34}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{Language=American English}
+
+\pagestyle{fancy}
+\setmarginsrb{20mm}{0mm}{20mm}{25mm}{12mm}{11mm}{0mm}{11mm}
+\lhead{MA4128} \rhead{Mr. Kevin O'Brien}
+\chead{Advanced Data Modelling}
+%\input{tcilatex}
+
+
+% http://www.norusis.com/pdf/SPC_v13.pdf
+\begin{document}
+\section{Standardizing the Variables}
+If variables are measured on different scales, variables with large values contribute
+more to the distance measure than variables with small values. In this example, both
+variables are measured on the same scale, so thats not much of a problem, assuming
+the judges use the scales similarly. But if you were looking at the distance between two
+people based on their IQs and incomes in dollars, you would probably find that the
+differences in incomes would dominate any distance measures. (A difference of only
+\$100 when squared becomes 10,000, while a difference of 30 IQ points would be only
+900. Id go for the IQ points over the dollars!).
+
+Variables that are measured in large numbers will contribute to the distance more than variables recorded in smaller
+numbers.
+
+In the hierarchical clustering procedure in SPSS, you can standardize variables in
+different ways. You can compute standardized scores or divide by just the standard
+deviation, range, mean, or maximum. This results in all variables contributing more
+equally to the distance measurement. Thats not necessarily always the best strategy,
+since variability of a measure can provide useful information. 
+%----------------------------------------------------- %
+\end{document}
