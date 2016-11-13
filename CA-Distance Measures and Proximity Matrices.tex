@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{framed}
+\usepackage{graphicx}
+\voffset=-1.5cm
+\oddsidemargin=0.0cm
+\textwidth = 470pt
+%----------------------------------------------------------------%
+
+% Euclidean Distance
+% Squared Euclidean Distance
+% City Block Distance
+%----------------------------------------------------------------%
+\begin{document}
+\author{Kevin O'Brien}
+\title{Cluster Analysis - Distance Measures and Proximity Matrices}
+\tableofcontents
+\large
+%http://www.econ.upf.edu/~michael/stanford/maeb4.pdf
+%http://stn.spotfire.com/spotfire_client_help/hc/hc_distance_measures_overview.htm
+\newpage
+\section{Euclidean Distance}
+The Euclidean distance between two points, x and y, with $k$ dimensions is calculated as:
+\[ \sqrt{ \sum^{k}_{j=1} ( x_j - y_j)^2 } \]
+The Euclidean distance is always greater than or equal to zero. The measurement would be zero for identical points and high for points that show little similarity.
+
+\subsection{Example}
+Compute the Euclidean Distance between the following points:
+$X = \{1,5,4,3\}$ and $Y = \{2,1,8,7\}$
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+$x_j$	&	$y_j$	&   $x_j - y_j$	&	$(x_j - y_j)^2$	\\ \hline
+1	&	2	&	-1	&	1	\\
+5	&	1	&	4	&	16	\\
+4	&	8	&	-4	&	16	\\
+3	&	7	&	-4	&	16	\\ \hline
+	&		&		&	49	\\ \hline
+\end{tabular}
+\end{center}
+The Euclidean Distance between the two points is $\sqrt{49}$ i.e. 7.
+
+\subsection{Squared Euclidean Distance}
+The Squared Euclidean distance between two points, x and y, with $k$ dimensions is calculated as:
+\[ \sum^{k}_{j=1} ( x_j - y_j)^2  \]
+The Squared Euclidean distance may be preferred to the Euclidean distance as it is slightly less computational complex, without loss of any information.
+
+%---------------------------------------------------------------------------%
+
+
+\section{Other Distance Measures supported by the \texttt{dist} Function}
+\begin{itemize}
+\item The d\texttt{ist} function computes and returns the distance matrix computed by using the specified distance measure to compute the distances between the rows of a data matrix.
+\item 
+The distance measures supported by \texttt{dist} are
+
+\begin{itemize}
+\item \texttt{euclidean} (but not squared euclidean directly)
+\item \texttt{maximum}
+\item \texttt{manhattan}
+\item \texttt{canberra}
+\item \texttt{binary} 
+\item \texttt{minkowski}.
+\end{itemize}
+\end{itemize}
+
+\subsection{Manhattan (City Block) Distance}
+The City block distance between two points, x and y, with $k$ dimensions is calculated as:
+\[ \sum^{k}_{j=1} | x_j - y_j |  \]
+
+The City block distance is always greater than or equal to zero. The measurement would be zero for identical points and high for points that show little similarity.
+
+\subsection{Example}
+Compute the Manhattan Distance between the following points: 
+$X = \{1,3,4,2\}$ and $Y = \{5,2,5,2\}$
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+$x_j$	&	$y_j$	&   $x_j - y_j$	&	$| x_j - y_j |$	\\ \hline
+1	&	5	&	-4	&	4	\\
+3	&	2	&	1	&	1	\\
+4	&	5	&	-1	&	1	\\
+2	&	2	&	0	&	0	\\ \hline
+& & & 6 \\
+  \hline
+\end{tabular}
+\end{center}
+The Manhattan Distance between the two points is 6.
+
+%--------------------------------------------------------------------------------------%
+\newpage
+
+\end{document}
