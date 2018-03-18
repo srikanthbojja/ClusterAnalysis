@@ -36,8 +36,8 @@ partitioning methods (more precisely, k-means), and two-step clustering,
 which is largely a combination of the first two methods. In the last class we looked as hierarchical clustering analysis.
 \item Each of these procedures
 follows a different approach to grouping the most similar objects into a cluster and
-to determining each object’s cluster membership.
-\item Some approaches – most notably hierarchical methods – require us to specify how similar or different objects
+to determining each objectâ€™s cluster membership.
+\item Some approaches â€“ most notably hierarchical methods â€“ require us to specify how similar or different objects
     are in order to identify different clusters. Most software packages, such as SPSS, calculate a measure
 of (dis)similarity by estimating the distance between pairs of objects. Objects with
 smaller distances between one another are more similar, whereas objects with larger
@@ -49,7 +49,7 @@ number of segments that have to be derived from the data will be known in advanc
 \item
 By choosing a specific clustering procedure, we determine how clusters are to be
 formed. (This always involves optimizing some kind of criterion, such as minimizing
-the within-cluster variance (i.e., the clustering variables’ overall variance of
+the within-cluster variance (i.e., the clustering variablesâ€™ overall variance of
 objects in a specific cluster), or maximizing the distance between the objects or
 clusters). The procedure could also address the question of how to determine the
 (dis)similarity between objects in a newly formed cluster and the remaining objects
@@ -74,7 +74,7 @@ cluster. This is an important distinction between these types of clustering and
 partitioning methods such as \textbf{\textit{k-means}}.
 \newpage
 \item There are various measures to express (dis)similarity between pairs of objects.
-A straightforward way to assess two objects’ proximity is by drawing a straight line
+A straightforward way to assess two objectsâ€™ proximity is by drawing a straight line
 between them.This type of distance is also referred to as
 \textbf{\textit{Euclidean distance}} (or straight-line distance) and is the most commonly used type
 when it comes to analyzing ratio or interval-scaled data.
@@ -86,7 +86,7 @@ when it comes to analyzing ratio or interval-scaled data.
 \end{figure}
 
 The Euclidean distance is the square root of the sum of the squared differences in
-the variables’ values. Suppose B and C were positioned as $(7,6)$ and $(6,5)$ respectively.
+the variablesâ€™ values. Suppose B and C were positioned as $(7,6)$ and $(6,5)$ respectively.
 \begin{figure}[h!]
 \begin{center}
   % Requires \usepackage{graphicx}
@@ -116,8 +116,8 @@ representing the objects under consideration.
 \end{center}
 \end{figure}
 
-\item There are also alternative distance measures: The \textbf{\textit{Manhattan distance}} or city-block distance uses the sum of the variables’ absolute differences. This is often called the Manhattan metric
-as it is akin to the walking distance between two points in a city like New York’s
+\item There are also alternative distance measures: The \textbf{\textit{Manhattan distance}} or city-block distance uses the sum of the variablesâ€™ absolute differences. This is often called the Manhattan metric
+as it is akin to the walking distance between two points in a city like New Yorkâ€™s
 Manhattan district, where the distance equals the number of blocks in the directions
 North-South and East-West. Using the points B and C that we used previously, the manhattan distance is computed as follows:
 \begin{figure}[h!]
@@ -130,7 +130,7 @@ North-South and East-West. Using the points B and C that we used previously, the
 
 \item When working with metric (or ordinal) data, researchers frequently use
 the \textbf{\textit{Chebychev distance}}, which is the maximum of the absolute difference in the
-clustering variables’ values. For B and C, this result is:
+clustering variablesâ€™ values. For B and C, this result is:
 
 \begin{figure}[h!]
 \begin{center}
@@ -157,14 +157,14 @@ which re-scales each variable to have a mean of 0 and a standard deviation of 1.
 
 \item In most situations, however, \textbf{\textit{standardization by range}}(e.g., to a
 range of 0 to 1 or -1 to 1) is preferable. We recommend standardizing the data
-in general, even though this procedure can potentially reduce or inflate the variables’ influence
+in general, even though this procedure can potentially reduce or inflate the variablesâ€™ influence
 on the clustering solution.
 
-\item A commonly used approach in hierarchical clustering is \textbf{\textit{Ward’s linkage method}}.
+\item A commonly used approach in hierarchical clustering is \textbf{\textit{Wardâ€™s linkage method}}.
 This approach does not combine the two most similar objects successively. Instead,
 those objects whose merger increases the overall within-cluster variance to the
 smallest possible degree, are combined. If you expect somewhat equally sized
-clusters and the data set does not include outliers, you should always use Ward’s
+clusters and the data set does not include outliers, you should always use Wardâ€™s
 method.
 
 We will use the Ward's linkage method for laboratory exercises.
@@ -190,7 +190,7 @@ distance between any two members in the two clusters.
 \end{center}
 \end{figure}
 \item[Average linkage] : The distance between two clusters is defined as the average
-distance between all pairs of the two clusters’ members.
+distance between all pairs of the two clustersâ€™ members.
 \begin{figure}[h!]
 \begin{center}
   % Requires \usepackage{graphicx}
@@ -208,14 +208,14 @@ the two centroids.
 \end{center}
 \end{figure}
 \end{description}
-Each of these linkage algorithms can yield totally different results when used on the same data set, as each has its specific properties. As the single linkage algorithm is based on minimum distances, it tends to form one large cluster with the other clusters containing only one or few objects each. We can make use of this \textbf{\textit{chaining effect}} to detect outliers, as these will be merged with the remaining objects – usually at very large distances – in the last steps of the analysis. Generally, single linkage is considered the most versatile algorithm.
+Each of these linkage algorithms can yield totally different results when used on the same data set, as each has its specific properties. As the single linkage algorithm is based on minimum distances, it tends to form one large cluster with the other clusters containing only one or few objects each. We can make use of this \textbf{\textit{chaining effect}} to detect outliers, as these will be merged with the remaining objects â€“ usually at very large distances â€“ in the last steps of the analysis. Generally, single linkage is considered the most versatile algorithm.
 
 Conversely, the complete linkage method is strongly affected by outliers, as it is based on maximum distances. Clusters produced by this method are likely to be rather compact and tightly clustered. The average linkage and centroid algorithms tend to produce clusters with rather low within-cluster variance and similar sizes.
 However, both procedures are affected by outliers, though not as much as complete linkage.
 
 An understanding of linkage method's other than than Ward method will be expected in the end of year examination.
 
-\item A common way to visualize the cluster analysis’s progress is by drawing a
+\item A common way to visualize the cluster analysisâ€™s progress is by drawing a
 dendrogram, which displays the distance level at which there was a combination
 of objects and clusters.
 Here is an example of a dendrogram (which corresponds to the example in the next section of material.
@@ -232,12 +232,12 @@ Here is an example of a dendrogram (which corresponds to the example in the next
 clusters to retain from the data. Unfortunately, hierarchical methods provide only
 very limited guidance for making this decision. The only meaningful indicator
 relates to the distances at which the objects are combined. Similar to factor
-analysis’s scree plot, we can seek a solution in which an additional combination
+analysisâ€™s scree plot, we can seek a solution in which an additional combination
 of clusters or objects would occur at a greatly increased distance. This raises the
 issue of what a great distance is, of course. For this purpose, we can make use of the dendrogram.
 
 \item In constructing the dendrogram, SPSS rescales the distances to a range
-of 0–25; that is, the last merging step to a one-cluster solution takes place at a
+of 0â€“25; that is, the last merging step to a one-cluster solution takes place at a
 (rescaled) distance of 25. The rescaling often lengthens the merging steps, thus
 making breaks occurring at a greatly increased distance level more obvious.
 Despite this, this distance-based decision rule does not work very well in all
@@ -252,8 +252,8 @@ a two-cluster solution ([A,B,C,D,E,F] and [G]), as well as a five-cluster soluti
 \end{itemize}
 \newpage
 \section{Clustering Algorithm}
-To better understand how a clustering algorithm works, let’s manually examine
-some of the single linkage procedure’s calculation steps. We start off by looking at
+To better understand how a clustering algorithm works, letâ€™s manually examine
+some of the single linkage procedureâ€™s calculation steps. We start off by looking at
 the initial (Euclidean) distance matrix displayed previously.
 
 \begin{figure}[h!]
@@ -271,7 +271,7 @@ procedure (e.g., single or complete linkage). (N.B. In the following example, ti
 \item As we can see, this happens to two
 pairs of objects, namely B and C (d(B, C) = 1.414), as well as C and E (d(C, E) =
 1.414). In the next step, we will see that it does not make any difference whether we
-first merge the one or the other, so let’s proceed by forming a new cluster, using
+first merge the one or the other, so letâ€™s proceed by forming a new cluster, using
 objects B and C.
 \begin{figure}[h!]
 \begin{center}
@@ -286,8 +286,8 @@ d(A, B) and d(A, C). As d(A, C) is smaller than d(A, B), the distance from A to 
 newly formed cluster is equal to d(A, C); that is, 2.236.
 \item We also compute the
 distances from cluster [B,C] (clusters are indicated by means of squared brackets)
-to all other objects (i.e. D, E, F, G) and simply copy the remaining distances – such
-as d(E, F) – that the previous clustering has not affected.
+to all other objects (i.e. D, E, F, G) and simply copy the remaining distances â€“ such
+as d(E, F) â€“ that the previous clustering has not affected.
 \begin{figure}[h!]
 \begin{center}
   % Requires \usepackage{graphicx}
@@ -344,83 +344,6 @@ do not need to decide on a distance measure in the first step of the analysis.
 
 \item Finally, you calculate the means of the clusters once again and assign the cases to their permanent clusters.
 \end{itemize}
-%------------------------------------------------------------------%
-\subsection{Initial Cluster Centres}
-The first step in k-means clustering is finding the k centres. This is done iteratively. You start with an initial set of centres and then modify them until the change between two iterations is small enough.
-
-If you have good guesses for the centres, you can use those
-as initial starting points; otherwise, you can let SPSS find k cases that are well separated and use these values as initial cluster centers. (i.e. The clustering process starts by randomly assigning objects to a number of
-clusters).
-
-
-
-K-means clustering is very sensitive to outliers, since they will usually be selected as initial cluster centers. This will result in outliers forming clusters with small numbers of cases. Before you start a cluster analysis, screen the data for outliers and remove them from the initial analysis. The solution may also depend on the order of the cases in the data.
-
-After the initial cluster centers have been selected, each case is assigned to the closest
-cluster, based on its distance from the cluster centers. After all of the cases have been
-assigned to clusters, the cluster centers are recomputed, based on all of the cases in the
-cluster.
-
-The cases are then successively reassigned to other clusters to minimize the within-cluster variation, which is basically the (squared) distance from each observation to the center of the associated cluster. If the reallocation of an case to another cluster decreases the within-cluster variation, this case is reassigned
-to that cluster.
-
-Case assignment is done again, using these updated cluster centers. You keep
-assigning cases and recomputing the cluster centers until no cluster center changes
-appreciably or the maximum number of iterations (10 by default) is reached.
-\newpage
-\subsection{Demonstration of k-means}
-In this example, two cluster centers are randomly
-initiated, which CC1 (first cluster) and CC2 (second cluster).
-\begin{figure}[h!]
-\begin{center}
-  % Requires \usepackage{graphicx}
-  \includegraphics[scale=0.4]{kmeans1.jpg}\\
-\end{center}
-\end{figure}
-\begin{figure}[h!]
-\begin{center}
-  % Requires \usepackage{graphicx}
-  \includegraphics[scale=0.4]{kmeans2.jpg}\\
-\end{center}
-\end{figure}
-Euclidean distances are computed from the cluster
-centers to every single object. Each object is then assigned to the cluster center with
-the shortest distance to it.
-
-In this example, objects A, B, and C are
-assigned to the first cluster, whereas objects D, E, F, and G are assigned to the
-second. We now have our initial partitioning of the objects into two clusters.
-Based on this initial partition, each cluster’s geometric center (i.e., its centroid)
-is computed (third step). This is done by computing the mean values of the objects
-contained in the cluster (e.g., A, B, C in the first cluster) regarding each of the variables
-(in this example: price consciousness and brand loyalty).
-\begin{figure}[h!]
-\begin{center}
-  % Requires \usepackage{graphicx}
-  \includegraphics[scale=0.4]{kmeans3.jpg}\\
-\end{center}
-\end{figure}
-\begin{figure}[h!]
-\begin{center}
-  % Requires \usepackage{graphicx}
-  \includegraphics[scale=0.4]{kmeans4.jpg}\\
-\end{center}
-\end{figure}
-Both clusters’centers now shift into new positions (CC1’ for the first and CC2’ for the second cluster).
-In the fourth step, the distances from each object to the newly located cluster
-centers are computed and objects are again assigned to a certain cluster on the basis
-of their minimum distance to other cluster centers (CC1’ and CC2’).
-
-Since the cluster centers’ position changed with respect to the initial situation in the first step,
-this could lead to a different cluster solution. This is also true of our example, as
-object E is now – unlike in the initial partition – closer to the first cluster center
-(CC1’) than to the second (CC2’). Consequently, this object is now assigned to the
-first cluster.
-The k-means procedure now repeats the third step and
-re-computes the cluster centers of the newly formed clusters, and so on.
-In other words, steps 3 and 4 are repeated until a predetermined number of iterations are
-reached, or convergence is achieved (i.e., there is no change in the cluster affiliations).
-
 \subsection{Performance of k-means clustering}
 Generally, k-means is superior to hierarchical methods as it is less affected by
 outliers and the presence of irrelevant clustering variables. Furthermore, k-means
