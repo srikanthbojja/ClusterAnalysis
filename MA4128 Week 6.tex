@@ -169,49 +169,6 @@ method.
 
 We will use the Ward's linkage method for laboratory exercises.
 
-\item Other most popular
-agglomerative clustering procedures include the following:
-\begin{description}
-\item[Single linkage (nearest neighbor)]: The distance between two clusters corresponds
-to the shortest distance between any two members in the two clusters.
-\begin{figure}[h!]
-\begin{center}
-  % Requires \usepackage{graphicx}
-  \includegraphics[scale=0.4]{Link1.jpg}\\
-\end{center}
-\end{figure}
-\item[Complete linkage (furthest neighbor)]: The oppositional approach to single
-linkage assumes that the distance between two clusters is based on the longest
-distance between any two members in the two clusters.
-\begin{figure}[h!]
-\begin{center}
-  % Requires \usepackage{graphicx}
-  \includegraphics[scale=0.4]{Link2.jpg}\\
-\end{center}
-\end{figure}
-\item[Average linkage] : The distance between two clusters is defined as the average
-distance between all pairs of the two clusters’ members.
-\begin{figure}[h!]
-\begin{center}
-  % Requires \usepackage{graphicx}
-  \includegraphics[scale=0.4]{Link3.jpg}\\
-\end{center}
-\end{figure}
-\newpage
-\item[Centroid] : In this approach, the geometric center (centroid) of each cluster is
-computed first. The distance between the two clusters equals the distance between
-the two centroids.
-\begin{figure}[h!]
-\begin{center}
-  % Requires \usepackage{graphicx}
-  \includegraphics[scale=0.4]{Link4.jpg}\\
-\end{center}
-\end{figure}
-\end{description}
-Each of these linkage algorithms can yield totally different results when used on the same data set, as each has its specific properties. As the single linkage algorithm is based on minimum distances, it tends to form one large cluster with the other clusters containing only one or few objects each. We can make use of this \textbf{\textit{chaining effect}} to detect outliers, as these will be merged with the remaining objects – usually at very large distances – in the last steps of the analysis. Generally, single linkage is considered the most versatile algorithm.
-
-Conversely, the complete linkage method is strongly affected by outliers, as it is based on maximum distances. Clusters produced by this method are likely to be rather compact and tightly clustered. The average linkage and centroid algorithms tend to produce clusters with rather low within-cluster variance and similar sizes.
-However, both procedures are affected by outliers, though not as much as complete linkage.
 
 An understanding of linkage method's other than than Ward method will be expected in the end of year examination.
 
